@@ -213,6 +213,14 @@ Evidence ([`cover_lemma.py`](../research/numerics/cover_lemma.py)):
 - **Size of the bad set.** The set of θ whose cell C(θ) needs n arcs never exceeded 32% of the circle. Below 50% already guarantees a good θ: if B is the bad set, then B and B − π cannot cover the circle.
 - **Typical structure.** Bad θ form windows of length ≤ w, one for each spanning chain whose gap contains [θ, θ+λ).
 
+**A proven sufficient condition.** Suppose some arc J ⊂ ℝP¹ of length < λ − w meets the line set D(p) of every point p. Then the Cover Lemma holds. Proof:
+- Take I ⊇ J of length λ. Every point has a vector in I⁺ or I⁻, so every point lies in exactly one cell.
+- Let p, q be in the same cell, with vectors x_p, x_q lying over J. The angle bound at q excludes v(p,q) from (x_q − λ, x_q + λ). The angle bound at p excludes v(p,q) from the antipodal arc around x_p.
+- Hence the line pq avoids (x_p − λ, x_p + λ) ∩ (x_q − λ, x_q + λ), which contains an open arc of length 2λ − |J| > λ + w.
+- So each cell's lines lie in a closed arc of length < π − λ − w = (n−1)λ, which n − 1 half-open λ-arcs cover.
+
+The extremal two-cluster configurations satisfy this condition, with J the connecting direction. General configurations need not.
+
 A proof of the Cover Lemma, for example a bound |bad set| < π, would settle the first band for every n.
 
 ### 6.6 Directions that look viable
