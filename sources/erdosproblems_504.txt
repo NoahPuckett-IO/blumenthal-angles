@@ -1,0 +1,24 @@
+ 
+      Let $\alpha_n$ be the supremum of all $0\leq \alpha\leq \pi$ such that in every set $A\subset \mathbb{R}^2$ of size $n$ there exist three distinct points $x,y,z\in A$ such that the angle determined by $xyz$ is at least $\alpha$. Determine $\alpha_n$.
+       
+     
+    
+  
+  Blumenthal's problem. Szekeres \cite{Sz41} showed that\[\alpha_{2^n+1}> \pi \left(1-\frac{1}{n}+\frac{1}{n(2^n+1)^2}\right)\]and\[\alpha_{2^n}\leq \pi\left(1-\frac{1}{n}\right).\]Erd\H{o}s and Szekeres \cite{ErSz60} showed that\[\alpha_{2^n}=\alpha_{2^n-1}= \pi\left(1-\frac{1}{n}\right),\]and suggested that perhaps $\alpha_{N}=\pi(1-1/n)$ for $2^{n-1}<N\leq 2^n$. This was disproved by Sendov \cite{Se92}.  Sendov \cite{Se93} provided the definitive answer, proving that $\alpha_N=\pi(1-1/n)$ for $2^{n-1}+2^{n-3}<N\leq 2^n$ and $\alpha_N=\pi(1-\frac{1}{2n-1})$ for $2^{n-1}<N\leq 2^{n-1}+2^{n-3}$. 
+  
+   
+  
+    
+   References 
+  
+  [ErSz60] Erd\H{o}s, P. and Szekeres, G.,  On some extremum problems in elementary geometry . Ann. Univ. Sci. Budapest. E\"{o}tv\"{o}s Sect. Math. (1960/61), 53-62.
+  
+  [Se92] Sendov, Bl.,  On a conjecture of P. Erd\H{o}s and G. Szekeres . C. R. Acad. Bulgare Sci. (1992), 17-20.
+  
+  [Se93] Sendov, Bl.,  Angles in a plane configuration of points . C. R. Acad. Bulgare Sci. (1993), 27-30.
+  
+  [Sz41] Szekeres, Gy.,  On an extremum problem in the plane . Amer. J. Math. (1941), 208-210.
+  
+   
+                                        
+  
