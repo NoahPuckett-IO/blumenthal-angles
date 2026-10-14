@@ -22,6 +22,10 @@ All scripts referred to below are in [`research/numerics/`](../research/numerics
    - Erdős–Szekeres "Kraft" counting over arc colourings.
 
    Any proof must use global structure or the counterexample hypothesis itself.
+6. **How much geometry is needed** (§6.4–6.5):
+   - (W) still holds numerically for abstract direction matrices in which every triple is a consistent triangle.
+   - The first band holds even when only per-point angle bounds are imposed.
+   - The first band reduces to a single-split statement (the "Cover Lemma") that held in every test, with a wide margin.
 
 **Verdict.** Sendov's classification is very probably true. Its general lower bound (non-dyadic N ≥ 17) is unproved in the literature. A complete formalization of JSP-000404 needs a new proof of inequality (W). §6 collects partial results and structure that a proof could start from.
 
@@ -177,7 +181,41 @@ Each example below satisfies (W), so none is a counterexample. Each shows that a
   - The 3-centre extremal configuration meets this with equality, so there is no slack.
 - **Sendov's own route** (order κ(1) ≥ … ≥ κ(s), guess the extremal profile) is refuted by §4.3.
 
-### 6.4 Directions that look viable
+### 6.4 How much geometry does a proof need?
+
+(W) mentions only the line directions at each point. So it can be posed for abstract *direction matrices*: assign to each ordered pair a vector direction v(p,q) ∈ S¹ with v(q,p) = v(p,q) + π, and require every angle at every point to be ≤ (1 − 2/u)π. Two relaxations of planar point sets were tested with [`direction_models.c`](../research/numerics/direction_models.c):
+
+| model | first band (u < 2n+1) | second band (2n+1 ≤ u < 2n+2) |
+|---|---|---|
+| **pseudo-configurations**: every triple is a consistent triangle, i.e. its three angles sum to π | bound holds (n = 3…5, s ≤ 8) | bound holds (n = 3…5, s ≤ 8) |
+| **local model**: per-point angle bound only | bound holds (n = 2…5, s ≤ 8) | **fails**: F = 12 > 10 at n = 3, s = 5 ([`local_model_cex_u8_s5.json`](../research/numerics/local_model_cex_u8_s5.json), checked by `verify_direction_matrix.py`) |
+
+Consequences for a proof:
+- **Second band.** It must use triangle angle sums, as Sendov's s = 3 argument does. It apparently need not use full planar realisability.
+- **First band** (α_N for 2^n < N ≤ 2^n + 2^{n−2}). It looks purely combinatorial: per-point angle bounds plus the Erdős–Szekeres colouring.
+- **n = 2 in the local model.** Every point has one sign change, so it is "hull-like". The normal arcs N_p = {x : ⟨x, v⟩ ≤ 0 for all v ∈ V(p)} are interior-disjoint, since v(p,q) = −v(q,p). Each has length ≥ λ, and 2π < 5λ (resp. 6λ) gives at most 4 (resp. 5) points.
+
+### 6.5 A reduction of the first band: the Cover Lemma
+
+For θ ∈ S¹, let C(θ) be the set of points with no vector in [θ, θ+λ). Then:
+- C(θ) ∪ C(θ+π) = P;
+- every pair inside one cell has its line outside [θ, θ+λ) mod π.
+
+> **Cover Lemma (conjecture, u < 2n+1).** There is a θ such that the lines inside C(θ) and the lines inside C(θ+π) can each be covered by n − 1 half-open λ-arcs.
+
+By the Erdős–Szekeres bound each cell then has ≤ 2^{n−1} points, so |P| ≤ 2^n: the first band of (L) follows. In words: one global λ-colour, followed by n − 1 colours chosen *separately in each half*, always suffices. A single global colouring does not (§6.3).
+
+A cell needs n arcs exactly when it contains a "spanning chain". That is n pairwise λ-separated lines filling the complementary arc of length (n−1)λ + w, with slack only w < λ/2.
+
+Evidence ([`cover_lemma.py`](../research/numerics/cover_lemma.py)):
+- **Local model:** no failure in about 400 configurations, n = 2…5. These were GC-expanded, up to 24 points.
+- **Real point sets:** no failure on realisations of the extremal configurations for n = 3, 4.
+- **Size of the bad set.** The set of θ whose cell C(θ) needs n arcs never exceeded 32% of the circle. Below 50% already guarantees a good θ: if B is the bad set, then B and B − π cannot cover the circle.
+- **Typical structure.** Bad θ form windows of length ≤ w, one for each spanning chain whose gap contains [θ, θ+λ).
+
+A proof of the Cover Lemma, for example a bound |bad set| < π, would settle the first band for every n.
+
+### 6.6 Directions that look viable
 
 - **Minimal counterexample plus rigidity.** Normalise the diameter of a counterexample Q with minimal s. Consider the closed set of configurations whose κ-profile dominates that of Q.
   - Suppose two points can be pushed together inside this set. All the GC conditions are closed, so the limit is a valid GC with s − 1 top-level centres and at least F(Q) points. Lemma 3.8 then contradicts minimality. Otherwise Q is rigid, i.e. many angles equal α and many gaps are exact multiples of λ. That rigidity could then be analysed.

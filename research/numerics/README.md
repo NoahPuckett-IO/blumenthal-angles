@@ -15,6 +15,9 @@ Supporting scripts for [`docs/MATH-CHECK.md`](../../docs/MATH-CHECK.md). Notatio
 | `sendov_s4_cfg_u10.txt` | n = 4 four-point set with F = 20 at u = 9.99, which beats Sendov's asserted 18. |
 | `irreducible_search.c`, `deletion_check.py`, `irreducible_cfg_u8_s6.txt` | Search for, and exact check of, a configuration where deleting any single point lowers F (delete-one induction fails). |
 | `kraft_partition_search.c` | Heuristic adversarial search for configurations with no arc-colouring Kraft certificate. |
+| `direction_models.c` | Annealing over abstract direction matrices. Default: pseudo-configurations (triangle-consistent). `NOTRI=1`: local model with per-point angle bounds only. `SHOW=1` prints the best matrix. Usage as `weight_search`. |
+| `verify_direction_matrix.py`, `local_model_cex_u8_s5.json` | Exact check of a direction matrix: antisymmetry, angle bound, triangle defect, κ, F. The JSON file is the local-model set with F = 12 > 10. |
+| `cover_lemma.py` | Cover Lemma tests on GC-expanded local configurations and on realised real point sets. Reports the fraction of bad θ. |
 | `kraft_exact.py`, `kraft_cfg_u7_s6.txt`, `kraft_cfg_u9_s7.txt` | Exhaustive enumeration over arc colourings (an LP per grouping) confirming that no certificate Σ 2^ν ≥ 2F exists for these sets. |
 
 Build: `cc -O2 -o weight_search weight_search.c -lm`.
