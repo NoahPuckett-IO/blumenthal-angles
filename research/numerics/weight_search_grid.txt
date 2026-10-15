@@ -1,0 +1,66 @@
+u=4.999999900 s=3 bestF=4 bound=4  k=0 1 0  maxang/pi=0.459776
+u=4.999999900 s=4 bestF=4 bound=4  k=0 0 0 0  maxang/pi=0.562705
+u=4.999999900 s=5 bestF=0 bound=4  k=0 0 0 0 0  maxang/pi=0.500000
+u=4.999999900 s=6 bestF=0 bound=4  k=0 0 0 0 0 0  maxang/pi=1.000000
+u=4.999999900 s=7 bestF=0 bound=4  k=0 0 0 0 0 0 1  maxang/pi=1.000000
+u=4.999999900 s=8 bestF=0 bound=4  k=0 0 0 0 0 0 1 0  maxang/pi=1.000000
+u=4.999999900 s=9 bestF=0 bound=4  k=0 0 0 0 0 0 1 0 0  maxang/pi=1.000000
+u=4.999999900 s=10 bestF=0 bound=4  k=0 0 0 0 0 0 1 0 0 0  maxang/pi=1.000000
+u=5.999999900 s=3 bestF=5 bound=5  k=0 1 1  maxang/pi=0.636118
+u=5.999999900 s=4 bestF=5 bound=5  k=0 0 1 0  maxang/pi=0.622151
+u=5.999999900 s=5 bestF=5 bound=5  k=0 0 0 0 0  maxang/pi=0.665314
+u=5.999999900 s=6 bestF=0 bound=5  k=1 1 1 0 1 0  maxang/pi=1.000000
+u=5.999999900 s=7 bestF=0 bound=5  k=0 0 1 0 0 0 1  maxang/pi=1.000000
+u=5.999999900 s=8 bestF=0 bound=5  k=0 0 0 0 0 0 1 0  maxang/pi=1.000000
+u=5.999999900 s=9 bestF=0 bound=5  k=0 0 0 0 0 0 1 0 0  maxang/pi=1.000000
+u=5.999999900 s=10 bestF=0 bound=5  k=0 0 0 0 0 0 1 0 0 0  maxang/pi=1.000000
+u=6.999999900 s=3 bestF=8 bound=8  k=1 2 1  maxang/pi=0.643415
+u=6.999999900 s=4 bestF=8 bound=8  k=1 1 1 1  maxang/pi=0.687106
+u=6.999999900 s=5 bestF=8 bound=8  k=0 0 2 0 0  maxang/pi=0.699243
+u=6.999999900 s=6 bestF=8 bound=8  k=0 1 0 0 1 0  maxang/pi=0.708213
+u=6.999999900 s=7 bestF=8 bound=8  k=0 1 0 0 0 0 0  maxang/pi=0.709492
+u=6.999999900 s=8 bestF=8 bound=8  k=0 0 0 0 0 0 0 0  maxang/pi=0.714034
+u=6.999999900 s=9 bestF=0 bound=8  k=0 0 0 0 0 0 2 0 0  maxang/pi=1.000000
+u=6.999999900 s=10 bestF=0 bound=8  k=0 0 0 0 0 0 2 0 0 0  maxang/pi=1.000000
+u=7.999999900 s=3 bestF=10 bound=10  k=2 2 1  maxang/pi=0.686912
+u=7.999999900 s=4 bestF=10 bound=10  k=1 2 1 1  maxang/pi=0.745706
+u=7.999999900 s=5 bestF=10 bound=10  k=1 0 2 1 0  maxang/pi=0.722203
+u=7.999999900 s=6 bestF=10 bound=10  k=1 1 0 1 0 1  maxang/pi=0.741097
+u=7.999999900 s=7 bestF=10 bound=10  k=0 1 1 0 1 0 0  maxang/pi=0.744973
+u=7.999999900 s=8 bestF=10 bound=10  k=0 0 0 1 0 0 1 0  maxang/pi=0.745264
+u=7.999999900 s=9 bestF=9 bound=10  k=0 0 0 0 0 0 0 0 0  maxang/pi=0.745293
+u=7.999999900 s=10 bestF=0 bound=10  k=0 0 0 0 0 0 2 0 0 0  maxang/pi=1.000000
+u=8.999999900 s=3 bestF=16 bound=16  k=2 3 2  maxang/pi=0.474826
+u=8.999999900 s=4 bestF=16 bound=16  k=2 2 2 2  maxang/pi=0.765321
+u=8.999999900 s=5 bestF=16 bound=16  k=1 1 3 1 1  maxang/pi=0.767813
+u=8.999999900 s=6 bestF=16 bound=16  k=1 3 0 1 1 0  maxang/pi=0.774796
+u=8.999999900 s=7 bestF=16 bound=16  k=1 1 1 1 2 1 1  maxang/pi=0.777353
+u=8.999999900 s=8 bestF=16 bound=16  k=1 1 1 1 1 0 0 2  maxang/pi=0.776727
+u=8.999999900 s=9 bestF=14 bound=16  k=1 1 0 0 1 1 1 0 0  maxang/pi=0.777744
+u=8.999999900 s=10 bestF=0 bound=16  k=1 1 1 2 1 1 3 1 2 1  maxang/pi=1.000000
+u=9.999999900 s=3 bestF=20 bound=20  k=3 3 2  maxang/pi=0.739544
+u=9.999999900 s=4 bestF=20 bound=20  k=1 3 1 3  maxang/pi=0.798824
+u=9.999999900 s=5 bestF=20 bound=20  k=1 3 0 3 0  maxang/pi=0.786633
+u=9.999999900 s=6 bestF=20 bound=20  k=1 1 1 3 2 1  maxang/pi=0.793297
+u=9.999999900 s=7 bestF=20 bound=20  k=2 1 1 1 2 2 1  maxang/pi=0.792038
+u=9.999999900 s=8 bestF=20 bound=20  k=1 2 1 2 1 0 0 2  maxang/pi=0.799686
+u=9.999999900 s=9 bestF=20 bound=20  k=1 1 2 1 1 1 1 1 1  maxang/pi=0.798469
+u=9.999999900 s=10 bestF=18 bound=20  k=0 1 1 0 1 2 0 0 1 1  maxang/pi=0.798647
+u=10.999999900 s=3 bestF=32 bound=32  k=3 4 3  maxang/pi=0.747143
+u=10.999999900 s=4 bestF=32 bound=32  k=3 3 3 3  maxang/pi=0.808123
+u=10.999999900 s=5 bestF=32 bound=32  k=1 3 4 1 2  maxang/pi=0.815579
+u=10.999999900 s=6 bestF=32 bound=32  k=3 3 2 2 2 2  maxang/pi=0.817017
+u=10.999999900 s=7 bestF=32 bound=32  k=1 2 3 2 1 3 2  maxang/pi=0.817451
+u=10.999999900 s=8 bestF=32 bound=32  k=2 1 2 3 2 1 2 2  maxang/pi=0.816991
+u=10.999999900 s=9 bestF=32 bound=32  k=1 1 1 1 3 2 1 1 3  maxang/pi=0.818170
+u=10.999999900 s=10 bestF=22 bound=32  k=1 0 1 0 2 2 1 1 1 1  maxang/pi=0.817764
+u=11.999999900 s=3 bestF=40 bound=40  k=4 4 3  maxang/pi=0.729666
+u=11.999999900 s=4 bestF=40 bound=40  k=3 4 3 3  maxang/pi=0.829208
+u=11.999999900 s=5 bestF=40 bound=40  k=3 4 2 3 2  maxang/pi=0.824855
+u=11.999999900 s=6 bestF=40 bound=40  k=4 0 2 0 1 4  maxang/pi=0.826382
+u=11.999999900 s=7 bestF=40 bound=40  k=2 3 2 4 1 1 2  maxang/pi=0.832970
+u=11.999999900 s=8 bestF=40 bound=40  k=2 3 3 2 2 2 2 2  maxang/pi=0.831372
+u=11.999999900 s=9 bestF=40 bound=40  k=2 2 2 2 2 3 2 2 2  maxang/pi=0.832975
+u=11.999999900 s=10 bestF=36 bound=40  k=2 1 1 2 2 2 1 1 3 2  maxang/pi=0.832210
+
+[exited with code 0]
