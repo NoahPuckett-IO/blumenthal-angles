@@ -26,10 +26,12 @@ The small cases are α_3 = π/3 and α_4 = π/2. Note that erdosproblems.com/504
 |---|---|
 | 1. Check Sendov's proof | **Done.** The gap is real: Lemma 4.1 is equivalent to the whole general lower bound. Numerics never beat Sendov's bound. See [`docs/MATH-CHECK.md`](docs/MATH-CHECK.md). |
 | 2. Lean definitions and target statement | **Done.** Honest `alpha N`, the full statement `SendovAnswer`, and its reduction to `CapacityBound`. |
-| 3. Upper bounds (constructions for all N) | Open: Erdős–Szekeres clustered sets plus Sendov's three-centre construction. |
-| 4. Dyadic lower bounds | Open: the Erdős–Szekeres / Szekeres direction-colouring argument. |
-| 5. General lower bound (inequality (W)) | **Open mathematics.** No proof exists in the literature. |
-| 6. Assemble and submit to the Justin Sun Prize | Pending steps 3–5. |
+| 3. Upper bounds (constructions for all N) | **Done.** `sendovUpper : SendovUpper` covers Szekeres' 2^m-point sets, the equilateral triangle, and Sendov's three-centre sets. |
+| 4. Dyadic lower bounds | **Done.** Erdős–Szekeres: a set with all angles ≤ (1 − 1/n)π has ≤ 2^n points (`card_le_two_pow_of_anglesLE`, `capacityBound_even`). Also α₃ = π/3 exactly. |
+| 5. General lower bound (inequality (W)) | **Open mathematics.** No proof exists in the literature. Attempts so far are recorded in [`docs/STEP5-NOTES.md`](docs/STEP5-NOTES.md). |
+| 6. Assemble and submit to the Justin Sun Prize | Blocked on step 5: only a *complete* determination of α_N qualifies. |
+
+**In one sentence:** the full answer `SendovAnswer` is now proved in Lean **assuming one geometric statement**, `CapacityBound` (`sendovAnswer_iff_capacityBound_and_upper` + `sendovUpper`), and that statement is the open part of the problem.
 
 ## Lean status
 
@@ -50,11 +52,12 @@ lake env lean Audit.lean
 | `Blumenthal/Defs.lean` | `Plane`, `AnglesLE`, `alpha N`, which is the literal supremum from erdosproblems.com/504. Interface lemmas: `le_alpha` (lower bounds), `alpha_le` and `alpha_le_of_approx` (upper bounds from configurations), `alpha_mono`, `exists_max_angle`. |
 | `Blumenthal/Statement.lean` | `SendovAnswer`, the full target with the corrected constant, *stated, not assumed*. Its halves `SendovLower` and `SendovUpper`. `capacity u` and `CapacityBound`: a set with all angles ≤ (1 − 2/u)π has ≤ `capacity u` points. |
 | `Blumenthal/Reduction.lean` | `capacityBound_iff_sendovLower` and `sendovAnswer_iff_capacityBound_and_upper`. The open lower-bound half is exactly `CapacityBound`. |
+| `Blumenthal/Dyadic.lean` | The Erdős–Szekeres colouring argument: `card_le_two_pow_of_anglesLE`, `capacityBound_even`, `le_alpha_of_two_pow_lt`. |
+| `Blumenthal/Expansion.lean` | General multi-scale construction theorem `alpha_le_of_construction`: points `Σ εʲ dⱼ`, angles tend to angles between leading differences, and an integer criterion bounds them. |
+| `Blumenthal/Upper.lean` | The constructions: `alpha_two_pow_le` (Szekeres), `alpha_three_le` / `alpha_three`, `alpha_lower_band_le` (Sendov's three-centre set), and `sendovUpper`. |
 | `Audit.lean` | `#print axioms` for the main results. All use only `propext`, `Classical.choice`, `Quot.sound`. |
 
-There is no `sorry` and no custom axiom. What remains:
-- `SendovUpper` (step 3);
-- `CapacityBound`. Its even-integer cases are step 4; its general case is the open mathematics described in `docs/MATH-CHECK.md`.
+There is no `sorry` and no custom axiom. What remains is exactly one statement: `CapacityBound` for non-even `u`, the open mathematics described in `docs/MATH-CHECK.md` and `docs/STEP5-NOTES.md`. Its even-integer cases are proved (`capacityBound_even`).
 
 ## Sources
 - B. Sendov, *Minimax of the angles in a plane configuration of points*, Acta Math. Hungar. 69 (1995) 27–46. Open copy: https://real-j.mtak.hu/7467/1/ActaMathHung_69.pdf. Russian exposition: Fundam. Prikl. Mat. 1 (1995), no. 2, 491–516 (mathnet.ru fpm81; PostScript on EMIS at `journals/FPM/ps/95/952/95210.zip`).
