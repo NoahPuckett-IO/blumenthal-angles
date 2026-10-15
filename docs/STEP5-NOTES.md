@@ -64,7 +64,7 @@ It then computes the exact largest family:
 |---|---|---|
 | 2 | (7,3), (9,4), (11,5) | 4 |
 | 3 | (10,3), (13,4), (16,5), (17,5), (19,6) | 8 |
-| 4 | (13,3), (17,4) | 16 |
+| 4 | (13,3), (17,4), (21,5) | 16 |
 
 At the band edge λ = 2π/(2n+1):
 - (7,2) gives 10 = 2³ + 2, which is the second-band value.
