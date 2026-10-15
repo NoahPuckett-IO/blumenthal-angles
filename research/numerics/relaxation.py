@@ -10,6 +10,9 @@ Usage:
   relaxation.py chif    m L          # fractional chromatic number of the compatibility graph
   relaxation.py tests   m L n trials # random maximal families: fixed test points vs. inflation to pi/n
   relaxation.py family  m L n s1 s2 ... # the same two checks for an explicit family
+  relaxation.py theta   m L          # Lovasz theta bound on the largest family (needs cvxpy)
+  relaxation.py split   m L trials   # random maximal families: can they be split into two parts that
+                                     # each stay valid after deleting a lambda-window (n -> n-1)?
 
 Needs networkx, numpy, scipy.
 """
@@ -67,6 +70,33 @@ def test_number(F, m):
         for T in itertools.combinations(range(m), k):
             if all(any(t in s for t in T) for s in sets):
                 return k
+
+
+def restrict(s, c, L):
+    """Delete the L cells starting at c (and their antipodes); the result lives on m-L cells."""
+    m = len(s)
+    S = s + [1 - x for x in s]
+    return [S[(c + L + i) % (2 * m)] for i in range(m - L)]
+
+
+def runs_ok(s, L):
+    m = len(s)
+    S = s + [1 - x for x in s]
+    ch = [i for i in range(2 * m) if S[i] != S[i - 1]]
+    return bool(ch) and all(b - a >= L for a, b in zip(ch, ch[1:] + [ch[0] + 2 * m]))
+
+
+def splittable(F, L):
+    m, N = len(F[0]), len(F)
+    good = set()
+    for c in range(m):
+        R = [restrict(s, c, L) for s in F]
+        ok = [runs_ok(r, L) for r in R]
+        for mask in range(1 << N):
+            mem = [i for i in range(N) if mask >> i & 1]
+            if all(ok[i] for i in mem) and all(compatible(R[i], R[j], L) for i, j in itertools.combinations(mem, 2)):
+                good.add(mask)
+    return any(((1 << N) - 1) ^ a in good for a in good)
 
 
 def changes(s):
@@ -147,6 +177,24 @@ if __name__ == "__main__":
             if not (key[1] and key[2]):
                 print("  ", key, " ".join("".join(map(str, s)) for s in F), flush=True)
         print(f"m={m} L={L} n={n}: (size, n points suffice, inflates to pi/n) -> count")
+        for k, v in sorted(stats.items()):
+            print("  ", k, v)
+    elif mode == "theta":
+        import cvxpy as cp
+        B = cp.Variable((len(V), len(V)), symmetric=True)
+        cons = [B >> 0, cp.trace(B) == 1]
+        cons += [B[i, j] == 0 for i, j in itertools.combinations(range(len(V)), 2) if not compatible(V[i], V[j], L)]
+        prob = cp.Problem(cp.Maximize(cp.sum(B)), cons)
+        prob.solve(solver=cp.SCS, eps=1e-7, max_iters=200000)
+        print(f"m={m} L={L} theta={prob.value:.4f}")
+    elif mode == "split":
+        rng = random.Random(5)
+        stats = {}
+        for _ in range(int(sys.argv[4])):
+            F = random_family(V, L, rng)
+            key = (len(F), splittable(F, L))
+            stats[key] = stats.get(key, 0) + 1
+        print(f"m={m} L={L}: (size, splittable) -> count")
         for k, v in sorted(stats.items()):
             print("  ", k, v)
     elif mode == "family":

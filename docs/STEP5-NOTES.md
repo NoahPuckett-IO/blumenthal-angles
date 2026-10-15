@@ -74,17 +74,28 @@ At the band edge λ = 2π/(2n+1):
 
 ### Why the standard tools cannot prove (R)
 
-1. **No Kraft / random-test argument works.** Every Erdős–Szekeres-style counting argument picks a
-   random test set in which no two members can be separated, and gives each function survival
-   probability ≥ 2^{−n}. That is a fractional colouring of the compatibility graph. The fractional
-   chromatic number exceeds 2^n (= ω):
-   - 9.52 at (10,3);
-   - 9.10 at (13,4);
-   - 8.86 at (16,5).
+1. **No LP or SDP bound works near the lower edge of the band.**
+   - Every Erdős–Szekeres-style counting argument picks a random test set in which no two members
+     can be separated, and gives each function survival probability ≥ 2^{−n}. That is a fractional
+     colouring of the compatibility graph.
+   - The Lovász theta function ϑ is the SDP analogue: the bound from orthogonal representations.
+   - Since |𝒮| is an integer, either bound would suffice if it were below 2^n + 1. It is not:
 
-   These discrete families embed in the continuous problem, so this holds there too. This explains
-   the failures of Attempt 1 and of the certificates in `MATH-CHECK.md` §6.3. **Any proof must
-   depend on the family itself (be adaptive).**
+     | (m, L) | L/m | χ_f | ϑ | ω |
+     |---|---|---|---|---|
+     | (9,4), n = 2 | 0.444 | 4.5 | 4.36 | 4 |
+     | (10,3), n = 3 | 0.300 | **9.52** | **9.07** | 8 |
+     | (13,4), n = 3 | 0.308 | **9.10** | 8.69 | 8 |
+     | (16,5), n = 3 | 0.313 | 8.86 | 8.48 | 8 |
+
+   - The bounds fall as λ grows towards π/n. Near λ = 2π/(2n+1) they exceed 2^n + 1. They cannot drop
+     below it there: these bounds vary continuously with λ, and at the edge the true value is already
+     2^n + 2^{n−2}.
+   - The discrete families embed in the continuous problem, so this holds there too. It explains why
+     Attempt 1 and the certificates in `MATH-CHECK.md` §6.3 failed.
+   - **A proof must use the strict inequality λ > 2π/(2n+1) in an integral way and depend on the
+     family itself.** This is how n = 2 works: arcs of length λ are packed on a circle,
+     N ≤ ⌊2π/λ⌋ = 4.
 2. **Fixed evaluation points do not suffice, even when chosen for the family.** This 8-member family
    at (10,3) cannot be separated by any 3 point evaluations:
 
@@ -108,6 +119,24 @@ At the band edge λ = 2π/(2n+1):
      `1110000111 0011110001 0111111111 0000000111 1111111100 0000111111 1111100000 1100000000`
 
    So a proof by inflation must handle multiply-winding walks.
+
+5. **Induction by deleting a λ-window fails.**
+   - Deleting a window of length λ from ℝP¹ (and its antipode from S¹) maps the first band for n onto
+     the first band for n − 1. So it would be enough to split 𝒮 into two parts that each stay valid
+     after deleting some window, possibly a different window for each part.
+   - This *split lemma* fails for many families, including maximum ones. Random maximal 8-member
+     families (n = 3) cannot be split this way in 13 of 69 cases at (10,3), and 13 of 34 at (13,4)
+     (`relaxation.py split`).
+   - The reason: deleting a window shortens the run that contains it. In particular, a function with
+     n sign changes cannot survive any deletion.
+   - This is the 1-D shadow of the Cover Lemma difficulty. Any recursion must transform the
+     functions, not merely restrict them.
+
+What still looks viable:
+- **Adaptive decision trees.** Every family tested has an adaptive evaluation tree of depth n.
+- **The winding analysis of item 4.** One would show that a family with 2^n + 1 members forces a
+  closed walk with k ≥ (2n+1)·(winding around S¹). The extremal configurations at the band edge
+  have exactly such a walk: 2n+1 tight constraints going once around S¹.
 
 For each fixed n there are only finitely many combinatorial types: 2^n + 1 functions, at most n sign
 changes each. So (R) for fixed n is a finite (very large) computation. This does not give all n.
