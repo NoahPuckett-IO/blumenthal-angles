@@ -28,7 +28,7 @@ The small cases are α_3 = π/3 and α_4 = π/2. Note that erdosproblems.com/504
 | 2. Lean definitions and target statement | **Done.** Honest `alpha N`, the full statement `SendovAnswer`, and its reduction to `CapacityBound`. |
 | 3. Upper bounds (constructions for all N) | **Done.** `sendovUpper : SendovUpper` covers Szekeres' 2^m-point sets, the equilateral triangle, and Sendov's three-centre sets. |
 | 4. Dyadic lower bounds | **Done.** Erdős–Szekeres: a set with all angles ≤ (1 − 1/n)π has ≤ 2^n points (`card_le_two_pow_of_anglesLE`, `capacityBound_even`). Also α₃ = π/3 exactly. |
-| 5. General lower bound (inequality (W)) | **Open mathematics.** No proof exists in the literature. Attempts so far are recorded in [`docs/STEP5-NOTES.md`](docs/STEP5-NOTES.md). |
+| 5. General lower bound (inequality (W)) | **Open mathematics.** No proof exists in the literature. The first band is now reduced to a one-dimensional statement (R) about sign functions on a circle. (R) is verified exactly for n ≤ 4, and it provably cannot be proved by any Erdős–Szekeres/Kraft-type counting argument. See [`docs/STEP5-NOTES.md`](docs/STEP5-NOTES.md). |
 | 6. Assemble and submit to the Justin Sun Prize | Blocked on step 5: only a *complete* determination of α_N qualifies. |
 
 **In one sentence:** the full answer `SendovAnswer` is now proved in Lean **assuming one geometric statement**, `CapacityBound` (`sendovAnswer_iff_capacityBound_and_upper` + `sendovUpper`), and that statement is the open part of the problem.

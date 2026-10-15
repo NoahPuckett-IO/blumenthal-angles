@@ -30,10 +30,95 @@ r → p → q in the merged class: the directions of rp and pq lie in S and in t
 more than λ apart. A proof along these lines needs a bound on such bent chains. The extremal
 three-centre configurations contain them, so the bound would have to be sharp. Not resolved.
 
+## Attempt 3: a one-dimensional relaxation of the first band (new; open)
+
+### The reduction (proved on paper)
+
+For p ∈ P let W(p) = V(p) ∪ −V(p) ⊂ S¹. Let σ_p : S¹ → {±1} be its *Voronoi sign function*:
+σ_p(x) = +1 if the point of W(p) nearest to x lies in V(p), and −1 if it lies in −V(p). Then:
+
+1. σ_p is odd: σ_p(x + π) = −σ_p(x).
+2. **Every run of σ_p has length ≥ λ.** σ_p changes sign only at midpoints of sign-change gaps,
+   which are ≥ λ (§6.1(a) of `MATH-CHECK.md`). A run from one such midpoint to the next therefore
+   contains ≥ λ/2 on each side.
+3. **For p ≠ q, σ_p = +1 and σ_q = −1 on the open arc (x − λ/2, x + λ/2), where x = v(p,q).** This holds
+   because x ∈ V(p), −x ∈ V(q), and the nearest point of opposite label is ≥ λ away in both sets.
+
+So the first band of (L) follows from a statement that involves no geometry at all, not even the
+triangle condition:
+
+> **(R)** Let (2n+1)λ > 2π. Let 𝒮 be a family of odd functions S¹ → {±1}, each with all runs of
+> length ≥ λ, such that any two of them take opposite values on some open arc of length λ. Then
+> |𝒮| ≤ 2^n.
+
+(R) is equivalent to the same statement for families of finite sets V ⊂ S¹ that contain no two
+vectors at angle > π − λ and satisfy V_p ∩ −V_q ≠ ∅ for p ≠ q. Each run condition forces at most n
+sign changes per half-turn.
+
+### Evidence that (R) is true
+
+[`relaxation.py`](../research/numerics/relaxation.py) discretizes ℝP¹ into m cells and sets λ = Lπ/m.
+It then computes the exact largest family:
+
+| n | first-band discretizations (m, L) | largest family |
+|---|---|---|
+| 2 | (7,3), (9,4), (11,5) | 4 |
+| 3 | (10,3), (13,4), (16,5), (17,5), (19,6) | 8 |
+| 4 | (13,3), (17,4) | 16 |
+
+At the band edge λ = 2π/(2n+1):
+- (7,2) gives 10 = 2³ + 2, which is the second-band value.
+- (9,2) gives **21 > 20 = 2⁴ + 2²**. So (R) fails in the second band, as the local model of
+  `MATH-CHECK.md` §6.4 already showed. The second band needs triangle geometry; the first band
+  apparently does not.
+
+### Why the standard tools cannot prove (R)
+
+1. **No Kraft / random-test argument works.** Every Erdős–Szekeres-style counting argument picks a
+   random test set in which no two members can be separated, and gives each function survival
+   probability ≥ 2^{−n}. That is a fractional colouring of the compatibility graph. The fractional
+   chromatic number exceeds 2^n (= ω):
+   - 9.52 at (10,3);
+   - 9.10 at (13,4);
+   - 8.86 at (16,5).
+
+   These discrete families embed in the continuous problem, so this holds there too. This explains
+   the failures of Attempt 1 and of the certificates in `MATH-CHECK.md` §6.3. **Any proof must
+   depend on the family itself (be adaptive).**
+2. **Fixed evaluation points do not suffice, even when chosen for the family.** This 8-member family
+   at (10,3) cannot be separated by any 3 point evaluations:
+
+   `0000001111 1111111111 1000011100 1000000000 0011110001 0001111111 1111000000 1111111000`
+
+   It needs 4. An adaptive decision tree of depth 3 does exist for it. A 14-member family at (13,3)
+   needs 5 evaluation points (`relaxation.py family`).
+3. **Cutting ℝP¹ at one point fails.** Already for four half-plane functions at n = 2, every cut point
+   lies inside the only long disagreement arc of some pair.
+4. **Inflation fails, but only rarely.** Fix the cyclic order of all sign changes. The constraints
+   (runs ≥ λ, one chosen disagreement run ≥ λ per pair) are then difference constraints. The family
+   is realisable exactly for λ ≤ min 2πw/k over closed walks in the constraint graph, where k counts
+   λ-constraints and w is the winding number.
+   - If every walk has k ≤ 2nw, the family can be re-embedded at λ = π/n, and Erdős–Szekeres gives
+     ≤ 2^n.
+   - A first-band family has k < (2n+1)w on every walk. So the only obstructions are walks winding
+     **w ≥ 2** times with 2nw < k < (2n+1)w.
+   - In random maximal families these do occur, rarely: about 3 in 500 for n = 3, 4. Examples: the
+     family in item 2, and
+
+     `1110000111 0011110001 0111111111 0000000111 1111111100 0000111111 1111100000 1100000000`
+
+   So a proof by inflation must handle multiply-winding walks.
+
+For each fixed n there are only finitely many combinatorial types: 2^n + 1 functions, at most n sign
+changes each. So (R) for fixed n is a finite (very large) computation. This does not give all n.
+
 ## What would settle the problem
 
 Any one of the following:
 - A proof of inequality (W) of `MATH-CHECK.md`, or of the Cover Lemma (§6.5) for the first band.
+- For the first band only: a proof of (R) above. By item 1 of Attempt 3 it must be adaptive; an
+  induction on n via decision trees, or an analysis of multiply-winding walks, are the natural
+  routes. The second band would still be open.
 - A computer-assisted proof for fixed n combined with a structural reduction to bounded n. No
   such reduction is known.
 

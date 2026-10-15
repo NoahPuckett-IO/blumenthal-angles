@@ -19,7 +19,8 @@ Supporting scripts for [`docs/MATH-CHECK.md`](../../docs/MATH-CHECK.md). Notatio
 | `verify_direction_matrix.py`, `local_model_cex_u8_s5.json` | Exact check of a direction matrix: antisymmetry, angle bound, triangle defect, κ, F. The JSON file is the local-model set with F = 12 > 10. |
 | `cover_lemma.py` | Cover Lemma tests on GC-expanded local configurations and on realised real point sets. Reports the fraction of bad θ. |
 | `kraft_exact.py`, `kraft_cfg_u7_s6.txt`, `kraft_cfg_u9_s7.txt` | Exhaustive enumeration over arc colourings (an LP per grouping) confirming that no certificate Σ 2^ν ≥ 2F exists for these sets. |
+| `relaxation.py` | The one-dimensional relaxation (R) of `docs/STEP5-NOTES.md`, Attempt 3. Modes: exact largest family (`clique m L`), fractional chromatic number (`chif m L`), random families tested for fixed evaluation points and inflation to λ = π/n (`tests m L n trials`), and the same checks for an explicit family (`family m L n s1 s2 …`). Needs networkx. |
 
 Build: `cc -O2 -o weight_search weight_search.c -lm`.
 
-Python dependencies: `pip install mpmath numpy scipy`.
+Python dependencies: `pip install mpmath numpy scipy networkx`.
