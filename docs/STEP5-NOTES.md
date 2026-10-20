@@ -66,6 +66,35 @@ It then computes the exact largest family:
 | 3 | (10,3), (13,4), (16,5), (17,5), (19,6) | 8 |
 | 4 | (13,3), (17,4), (21,5) | 16 |
 
+| 5 | (16,3), (21,4), (26,5) | 32 |
+
+**n = 5 (exact).** [`relaxation_cpsat.py`](../research/numerics/relaxation_cpsat.py) solves the same
+maximum-family problem with OR-tools CP-SAT (16 workers): one AtMostOne per clique of a greedy
+edge-clique cover of the incompatibility graph, maximise Σx_f, CP-SAT's own symmetry detection. It
+returns OPTIMAL (objective = bound) at (16,3), (21,4), (26,5), so the largest family is exactly 2⁵ = 32:
+
+| (m, L) | L/m | functions | largest family | wall time |
+|---|---|---|---|---|
+| (16,3) | 0.1875 | 448 | 32 | 134 s |
+| (21,4) | 0.1905 | 854 | 32 | 192 s |
+| (26,5) | 0.1923 | 1456 | 32 | 658 s |
+| (27,5) | 0.1852 | 1854 | ≥ 32; bound 37 after 45 min, not closed | — |
+| (11,2), band edge | 0.1818 | 198 | **41 > 40 = 2⁵ + 2³** | 0.2 s |
+
+(Desktop, 16 threads, Python 3.13, ortools 9.15. Cross-checks: the same script reproduces 8 at
+(10,3) and 16 at (13,3), (17,4). The independent SAT script
+[`relaxation_sat.py`](../research/numerics/relaxation_sat.py) — CaDiCaL, clause per incompatible
+pair, totalizer over a partition into incompatible classes, one case per symmetry orbit — reproduces
+n ≤ 4 and finds 32 at (16,3), and proves 9 of its 10 orbit cases UNSAT at K = 33 there; its remaining
+(unrestricted) case did not finish in ~30 min, so the n = 5 verdict rests on CP-SAT.)
+
+Structure of the optimal families. Counting sign changes per half-turn, the optimal families found are
+n = 3: 6×1, 2×3; n = 4: 8×1, 8×3; n = 5: 10×1, 20×3, 2×5. These are exactly the counts for the
+Erdős–Szekeres product family {±1}ⁿ (a word ε has as many changes as the cyclic word (ε, −ε) has
+alternations per half-turn: for n = 5, j and 5−j ones give 2·C(5,j) words). So at n = 5 the maximum
+is attained by (a realisation of) the λ = π/n family, consistent with item 4 below: nothing beyond
+inflatable families appears at the optimum.
+
 At the band edge λ = 2π/(2n+1):
 - (7,2) gives 10 = 2³ + 2, which is the second-band value.
 - (9,2) gives **21 > 20 = 2⁴ + 2²**. So (R) fails in the second band, as the local model of

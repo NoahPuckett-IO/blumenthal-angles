@@ -20,6 +20,8 @@ Supporting scripts for [`docs/MATH-CHECK.md`](../../docs/MATH-CHECK.md). Notatio
 | `cover_lemma.py` | Cover Lemma tests on GC-expanded local configurations and on realised real point sets. Reports the fraction of bad θ. |
 | `kraft_exact.py`, `kraft_cfg_u7_s6.txt`, `kraft_cfg_u9_s7.txt` | Exhaustive enumeration over arc colourings (an LP per grouping) confirming that no certificate Σ 2^ν ≥ 2F exists for these sets. |
 | `relaxation.py` | The one-dimensional relaxation (R) of `docs/STEP5-NOTES.md`, Attempt 3. Modes: exact largest family (`clique m L`), fractional chromatic number (`chif m L`), random families tested for fixed evaluation points and inflation to λ = π/n (`tests m L n trials`), and the same checks for an explicit family (`family m L n s1 s2 …`). Also `theta m L` (Lovász ϑ; needs cvxpy) and `split m L trials` (window-deletion induction). Needs networkx. |
+| `relaxation_cpsat.py` | Exact largest family for (R) at fixed (m, L) with OR-tools CP-SAT (`relaxation_cpsat.py m L max [workers] [time_limit]`). Verifies n = 5: 32 at (16,3), (21,4), (26,5); (27,5) did not close in 45 min. Needs ortools. |
+| `relaxation_sat.py` | Independent SAT check (CaDiCaL via python-sat) of "family of size K exists" at (m, L), split by symmetry orbit. Fast for n ≤ 4; the unrestricted case at n = 5 is slow. Needs python-sat. |
 
 Build: `cc -O2 -o weight_search weight_search.c -lm`.
 
