@@ -78,7 +78,7 @@ returns OPTIMAL (objective = bound) at (16,3), (21,4), (26,5), so the largest fa
 | (16,3) | 0.1875 | 448 | 32 | 134 s |
 | (21,4) | 0.1905 | 854 | 32 | 192 s |
 | (26,5) | 0.1923 | 1456 | 32 | 658 s |
-| (27,5) | 0.1852 | 1854 | ≥ 32; bound 37 after 45 min, not closed | — |
+| (27,5) | 0.1852 | 1854 | ≥ 32; upper bound 35 after 1.8 h (run then stopped), not closed | — |
 | (11,2), band edge | 0.1818 | 198 | **41 > 40 = 2⁵ + 2³** | 0.2 s |
 
 (Desktop, 16 threads, Python 3.13, ortools 9.15. Cross-checks: the same script reproduces 8 at
