@@ -658,6 +658,40 @@ Further data:
 - **Band-edge class maxima.** 12 at (9,2), 19 at (13,2) (n = 6), 26 at (17,2) (n = 8), i.e. (7n − 4)/2.
 - **n = 6.** (25,4): class maximum 12 = cap (OPTIMAL). (32,5): ≥ 12, bound 15 after 58 min, not closed.
 
+### 5.7 Partial results on (U)
+
+- **Theorem E needs no slots.** For each member, the y with no change of f in (y, y + 1) form a set of
+  measure P − (n − 1) = 1 + ε. So the average number of members missing a unit window is N(1 + ε)/P. For
+  N = 2n + 1 this is < 3 exactly when ε < ½, so some window has ≥ 2n − 1 changers.
+- **(U) holds for short windows (proved).** At most 2n − 2 members change in any open arc of length
+  ≤ 1 − ε. *Proof.*
+  - Embed the arc in a unit window U, and cover the other changes of the changers by greedy half-open unit
+    slots in T ∖ U. If at most n − 1 slots are needed, the slot argument of §5.3, with U as slot 0, injects
+    the changers into (missing slot, sign): at most 2(n − 1) words.
+  - Otherwise greedy finds n changes, consecutive ones ≥ 1 apart. Call the owners of the first and last
+    f_1 and f_n. Their changes in U satisfy p_n − p_1 ≥ (n − 1) + 2 − P = 1 − ε.
+  - So the U-changes are not inside an arc of length < 1 − ε. ∎
+- **Why that is not enough.**
+  - Fed into the averaging, the short version gives the cap 2n only for ε < 1/(2n + 3).
+  - For a unit window, the obstruction is a chain of n + 2 changes, from p_1 to p_n + P, with every gap in
+    [1, 1 + ε). It needs changers whose U-changes lie near both ends of U.
+- **(U) is not LP either.** The fractional bound for the changers of one window is:
+  - 7.50 at (13,3);
+  - 7.09 at (17,4);
+  - 7.85 at (22,5);
+
+  all above 2n − 1 = 7.
+- **Structure at (22,5).** Changers with an upward change in U number at most 5 = 2n − 3. With k up-changers
+  the total is still at most 6, for every k = 1, …, 5 (CP-SAT OPTIMAL). So the two directions trade off one
+  for one.
+- **A block recursion.** Let (U_r) say: at most 2(n − r) members change in each of r consecutive unit
+  windows. (U_{n−1}) holds trivially. All changes are then pinned, so members of the same sign are
+  incompatible, giving ≤ 2.
+  - Averaging the step (U_{r+1}) → (U_r) over windows in the complement of the block works for
+    ε < (m − 4)/(2m − 2) with m = n − r, because each member loses at most 1 + ε at the block's ends.
+  - It fails for m ≤ 4 at every ε, and for larger ε at every m. So small m and large ε need another
+    argument.
+
 ## What would settle the problem
 
 Any one of the following:
