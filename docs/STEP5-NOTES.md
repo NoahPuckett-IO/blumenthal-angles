@@ -708,6 +708,38 @@ Further data:
   - Already, the exact computations at (16,3), (21,4), (26,5) cover π/λ ≤ 16/3. So only the strip
     (16/3, 5.5) is open, and the grid (60,11) decides it.
 
+### 5.8 Two further routes to (U), and where they stop
+
+**(a) Induction on n, as a minimal-counterexample argument.** Take a window U with 2n − 1 changers, at
+the least n for which (U) fails.
+- Delete a 2-window W that avoids the U-changes. By Lemma D, the members with exactly two changes in W
+  remain compatible changers of U in band n − 2. By minimality there are ≤ 2n − 6 of them.
+- So every such W must have ≥ 5 changers without two changes in it. A contradiction needs one W with ≤ 4.
+- Relative to a slot lattice with slot 0 ⊃ U-changes, the aligned windows S_k ∪ S_{k+1} lose at most 4
+  of the members with no change in the leftover arc, by injectivity of the words.
+- Each member with a change in the leftover arc misses two slots and spoils every aligned window that
+  meets either one. For n = 4 one such member spoils both aligned windows.
+- **This is where the route stops.** Excluding windows with ≥ 5 losses is the same window-finding
+  problem as §5.2, now inside the changers.
+- Numerically the needed window always exists: every random maximal changer family at (22,5) (300) and
+  (31,7) (200) has a W with ≤ 4 losses, and the 6-member ones have exactly 4. But a 7-member family
+  cannot be tested.
+- Contracting a single slot instead (unit deletion, band n − 1) keeps only the members whose change in the
+  slot is isolated (Lemma K). With Theorem B there are at most 2 of them, so the counterexample is never
+  transported.
+
+**(b) Antipodal labelling / Tucker–Ky Fan.**
+- Label x ∈ S¹ by the members that are + on a unit arc at x. Compatibility says every pair is separated by
+  some antipodal pair of labels.
+- Every integral bound found so far (Erdős–Szekeres at λ = π/n, the slot lemma, Theorem B, Lemma U′)
+  injects the family into words through *one* cell structure. A parity or degree argument would naturally
+  produce such a structure.
+- **This is where the route stops:** no such structure exists in general. The non-inflatable 8-families
+  at (13,3) (§4.5) have a change at all 13 boundaries. Four half-open slots of length λ cover at most 12
+  of them.
+- So a Tucker-type proof would have to give an injection into 2^n (or 2C(n,c)) words not induced by any
+  single cell structure. None was found.
+
 ## What would settle the problem
 
 Any one of the following:
