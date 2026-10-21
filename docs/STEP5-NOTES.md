@@ -691,6 +691,22 @@ Further data:
     ε < (m − 4)/(2m − 2) with m = n − r, because each member loses at most 1 + ε at the block's ends.
   - It fails for m ≤ 4 at every ε, and for larger ε at every m. So small m and large ε need another
     argument.
+- **The tight chain does not lower the count.** At (22,5) there are 5 possible chains (4 changes in
+  T ∖ U, consecutive gaps ≥ λ). For each one, forcing every chain point to be a change of the family
+  still allows 6 = 2n − 2 changers (CP-SAT OPTIMAL). Example: five down-changers {0,5,11}, {0,5,16},
+  {3,15,20}, {4,10,15}, {4,9,21} and one up-changer {0,12,17}. So excluding chains is (U) itself.
+  - Relative to the lattice of the chain (slots of length λ from the first U-change, leftover arc of
+    length ε), the members with no change in the leftover inject as usual. The members with a change in
+    the leftover miss two slots.
+  - In the example these leftover members are exactly as many as the unused words, but no simple rule
+    assigns them words: (largest or smallest missing slot) × (same or flipped direction). Each such rule
+    fails on a third or more of the random maximal changer families at (22,5).
+- **c = n − 2, n = 5: the tools give nothing new.**
+  - The reduction above needs ε < ¼.
+  - Lemma D needs a point with ≤ 14 non-survivors. Averaging gives about 16.8.
+  - Lemma I gives only ≤ 12 deep members, via (R_5) at n = 6, where words have 2.
+  - Already, the exact computations at (16,3), (21,4), (26,5) cover π/λ ≤ 16/3. So only the strip
+    (16/3, 5.5) is open, and the grid (60,11) decides it.
 
 ## What would settle the problem
 
