@@ -740,6 +740,43 @@ the least n for which (U) fails.
 - So a Tucker-type proof would have to give an injection into 2^n (or 2C(n,c)) words not induced by any
   single cell structure. None was found.
 
+### 5.9 Further angles (n = 4 unless noted)
+
+**Capture covering: new, integral, unproved.** Call a sequence of the window operations D, K, I of §5.1 a
+*capture* if it ends in the top class of an odd band. The members it keeps are pairwise compatible there,
+so by Theorem B (Theorem A in band 1) it keeps at most 2 of them.
+- **Every member is capturable.**
+  - A member with a run ≥ 2 is captured by I at a deep point.
+  - Any other member is captured by D^j I. Deleting j windows merges 2j + 1 consecutive runs into a run of
+    length 1 + (2j + 1)(slack)/(n − 1). That reaches 2 within the available j.
+- **Conjecture (C).** Every compatible family of class n − 1 is covered by n captures. (C) implies |𝒮| ≤ 2n
+  with no averaging.
+- **Evidence** (`capture.py`, depth ≤ 2, i.e. D, K, I, DK, DI, KD, ID at every position of the doubled grid):
+  - all 130 functions at (13,3) and all 528 at (22,5) are capturable;
+  - every random maximal family of size 7 or 8 (100 at each grid) is covered by exactly 4 = n captures.
+  - The non-inflatable 8-family of §4.5 is covered by one DI and three DK. So the maximum families split into
+    n captured pairs.
+- **Where it stops.** Induction through D lifts a cover of the survivors at x (n − 2 captures) and needs the
+  non-survivors at x covered by 2 captures, i.e. ≤ 4 of them. That is again the window step of §5.2.
+
+**Dead angles.**
+- **Polynomial method / Haemers rank over F₂** (`haemers.py`, CaDiCaL):
+  - Class 1 at (9,4) needs rank 5 > 4 = α.
+  - Even Theorem B's class at (10,3) needs rank > 2.
+  - So low-rank fitting matrices cannot see these packing bounds.
+- **LP plus every capture and deletion cut up to depth 2** (468 cuts at (13,3)): still 9.5789, the same as
+  with depth-1 cuts (D, I, K). These local integral lemmas are exhausted.
+- **Shifting / compression.** Type-preserving compression stops at P*, and P* = 13/3 > 4 for maximum
+  families. Compressing to one cell structure is impossible when every cell is used (§5.8).
+- **Stability / extension.** For F of size 2n + 1 and any g ∈ F, the points where F ∖ g has exactly 4
+  non-survivors lie inside BC(g) automatically. The only quantitative version reproduces Theorem D's
+  threshold.
+- **Zones of U for (U).** Split U into end zones of length ε and a middle. Lemma U′ gives
+  |left| + |middle| ≤ 2n − 2 and |middle| + |right| ≤ 2n − 2. A counterexample needs both end zones
+  occupied, and nothing closes the gap.
+- **Double counting (member, witness) with parity.** No parity identity was found. On T, fg has an even
+  number of changes, but the number of long opposite runs has no fixed parity.
+
 ## What would settle the problem
 
 Any one of the following:
