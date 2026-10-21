@@ -4,6 +4,7 @@ Status: **open in general.** The one-dimensional statement (R) of Attempt 3 is n
 (by hand) and **for n = 4** (computer-assisted, one exact computation checked by two solvers); see
 Attempt 4. With Attempt 3's reduction this settles the first band for N ≤ 20. (R) for n ≥ 5, and the
 second band, remain open. These notes record what has been tried, so nobody repeats it.
+Attempt 5: for even n the top class c = n − 1 is proved near λ = π/n, and on the whole band it is reduced to a one-window lemma (U) that is checked numerically but not proved.
 
 Notation follows `MATH-CHECK.md`. All angles are ≤ π − λ, with λ = 2π/u. The first band is
 2π/(2n+1) < λ ≤ π/n, where the target is |P| ≤ 2^n. Partition ℝP¹ into n arcs of width λ and one
@@ -455,6 +456,207 @@ vanish.
   - Just above the edge they must trade off down to 8. No argument found.
 - **All n.** The grid of Corollary 1 grows like J ~ n·2^n. So the reduction settles each n in principle
   but is not a route to every n.
+
+## Attempt 5: the top class for even n (c = n − 1) (2026-10-20)
+
+**Results.**
+- Three operations on a family keep compatibility (§5.1). With Theorem B, two of them give local integral
+  bounds. The third gives a recursion n → n − 2.
+- **Theorem D.** (R_{n−1}) holds for every even n when π/λ < n + 2/13 (§5.2, by hand). With Theorem C as
+  the base, it holds for n ≥ 6 when π/λ < n + 4/21.
+- **Theorem E.** On the whole band, (R_{n−1}) follows from one local statement (U): at most 2n − 2 members
+  change inside any open arc of length λ (§5.3).
+  - (U) is exact (CP-SAT OPTIMAL) on every grid tested.
+  - It fails at the band edge, as it must.
+  - **(U) is not proved.**
+- **c = n − 2 (n odd):** the same reduction covers only π/λ < n + 1/(n−1). No proof (§5.5).
+
+Notation: units λ = 1, T = ℝ/Pℤ, P = π/λ = n + ε, 0 ≤ ε < ½. Members have runs ≥ 1. M(n, c) is the largest
+class-c family in band n. The scripts used here are not in the repository; they are kept with the session
+notes.
+
+### 5.1 Three compatibility-preserving operations
+
+**Lemma D (delete a window of length 2).** Let W ⊂ T be an open arc of length 2. Let 𝒮_W be the members with
+exactly two changes in W. Delete W and glue. Then each f ∈ 𝒮_W becomes a class-(c − 2) function with runs
+≥ 1 on a circle of length P − 2 (band n − 2), and compatible members stay compatible. Hence
+|𝒮_W| ≤ M(n − 2, c − 2).
+
+*Proof.* Validity:
+- Let p_0 < p_1 < p_2 < p_3 be consecutive changes of f, with p_1, p_2 ∈ W = (w, w + 2) and p_0 ≤ w,
+  p_3 ≥ w + 2.
+- Two changes are removed, so f has no change at the seam. The merged run has length p_3 − p_0 − 2 ≥ 1.
+- The deleted set is P-periodic, so oddness is kept.
+
+Compatibility. Take a witness A for f, g ∈ 𝒮_W (Lemma 0: open, length 1, f = −g, no change of f or g). If A
+misses W + Pℤ it survives; for n ≥ 4 it meets at most one translate. Set:
+- q_1 < q_2: the changes of g in W;
+- u = max(p_1, q_1), v = min(p_2, q_2);
+- σ: the value of fg just left of w. It is also the value just right of w + 2, since both f and g change
+  twice in W;
+- L, R: the last change of f or g before u, and the first after v. So L ≤ u − 1 and R ≥ v + 1.
+
+The cases:
+- *A ⊂ W.* The four points cut W into pieces.
+  - The end pieces are shorter than 1, because p_2 − p_1 ≥ 1 and the span of the four points is < 2.
+  - Apart from (u, v), the two remaining pieces have total length < 1.
+  - So A ⊂ (u, v). There fg = σ, so σ = −1.
+  - The glued arc (L, w) ∪ (w + 2, R) is opposite, change-free, and has length ≥ v − u ≥ 1.
+- *A ∋ w.* Then σ = −1, and A ∩ W lies left of min(p_1, q_1). The arc A ∖ W, glued to (w + 2, R), has
+  length ≥ min(p_2, q_2) − min(p_1, q_1) ≥ 1.
+- *A ∋ w + 2.* Symmetric. ∎
+
+**Lemma I (insert a unit window).** Fix x ∈ T. Insert a unit window at x, and give each member f the value
+−f(x) on it. Each member with no change in (x − 1, x + 1) becomes class c + 2 in band n + 1, with runs ≥ 1:
+the new runs are x − z_−, 1 and z_+ − x. Compatibility is kept:
+- a witness not containing x survives;
+- if x ∈ A, then fg(x) = −1 and the window itself is a witness.
+
+So at most M(n + 1, c + 2) members have no change in (x − 1, x + 1). *For c = n − 1, n even, Theorem B
+gives ≤ 2.*
+
+**Lemma K (delete a unit window).** Let W = (w, w + 1). Take the members with exactly one change in W and no
+other change in (w − 1, w + 2). Deleting W makes them class c in band n − 1, compatibly:
+- if fg = −1 at the seam, the glued opposite arc has length ≥ 2;
+- otherwise every witness avoids the collar.
+
+So there are at most M(n − 1, c) of them. *For c = n − 1, Theorem B gives ≤ 2.*
+
+Lemma D was checked on doubled grids, for every window, on 200 random maximal families at (13,3) and 100
+at (31,7) (n = 4). It never failed.
+
+### 5.2 Theorem D: the recursion near λ = π/n
+
+f *survives* at x if (x − 1, x + 1) contains exactly two changes of f.
+- f survives iff the run of f through x reaches within distance 1 of x on both sides.
+- So the set where f does not survive, BC(f), has measure ≤ 2P − 2c. For c = n − 1 this is 2 + 2ε.
+- Lemma D gives |𝒮| ≤ M(n − 2, n − 3) + #{non-survivors at x}, for every x.
+
+*Proof of Theorem D.* Induct on even n; the base case n = 2 is Theorem A.
+- If |𝒮| = 2n + 1 and every x had ≥ 5 non-survivors, then 5P ≤ Σ_f |BC(f)| ≤ (2n + 1)(2 + 2ε). That
+  forces ε ≥ (n − 2)/(4n − 3).
+- So for smaller ε, some x has ≥ 2n − 3 survivors. They contradict the induction hypothesis at the same ε.
+- The thresholds (k − 2)/(4k − 3) increase with k, so the binding one is k = 4, giving 2/13. Starting from
+  Theorem C, the binding one is k = 6, giving 4/21. ∎
+
+**This averaging is exactly the LP bound.** Averaged over x, Lemma D gives |𝒮| ≤ 2(n − 2)P/(n − 2 − ε). That
+equals the fractional chromatic number of the class:
+
+| grid | 2(n−2)P/(n−2−ε) | χ_f |
+|---|---|---|
+| (13,3) | 10.400 | 10.400 |
+| (17,4) | 9.714 | 9.714 |
+| (22,5) | 11.000 | 11.000 |
+
+Adding integral cuts to that LP (clique constraints, plus at every x: survivors ≤ 2(n − 2); members with no
+change in (x − 1, x + 1) ≤ 2 (Lemma I); isolated changes ≤ 2 (Lemma K)) lowers it, but not below 9:
+- (13,3): 9.58;
+- (17,4): 9.15;
+- (22,5): 9.94 (survivor cut only).
+
+The LP optimum puts all its weight on functions with a gap ≥ 2λ (shapes (1,1,7/3) and (1,4/3,2) at (13,3)).
+
+### 5.3 Theorem E: the whole band from one window
+
+**Slot lemma.** Suppose the union Z of all change points has two cyclically consecutive points more than ε
+apart. Then |𝒮_c| ≤ 2C(n, c), and |𝒮| ≤ 2^n.
+
+*Proof.* Choose y so that [y − ε, y) contains no change. The half-open unit slots [y + k, y + k + 1),
+k = 0, …, n − 1, then hold all changes, each at most one per member. A member's word is its set of
+occupied slots together with its value just before y. If f, g have the same word, then:
+- f = g at every slot boundary;
+- f = g in the gap and in unoccupied slots;
+- inside an occupied slot, fg = −1 only between the two changes, on an arc shorter than 1.
+
+So f and g are incompatible. ∎
+
+A 2^n + 1 family therefore has an ε-dense change set. This is consistent with the non-inflatable families
+of §4.5, which use every cell of (13,3).
+
+**(U), conjecture.** For every open arc U ⊂ T of length 1, at most 2n − 2 members of 𝒮_{n−1} change in U.
+
+**Theorem E.** (U) implies (R_{n−1}) for every ε < ½.
+
+*Proof.* Suppose |𝒮| = N = 2n + 1. For y ∈ T, let c(y) be the number of members with a change in
+Λ = (y − ε, y).
+- Since ∫c = N(n − 1)ε < (n − 1)P exactly when ε < ½, there is a positive-measure set of y with
+  c(y) ≤ n − 2. Take such a y with no change at any of the points y + k.
+- The open unit slots S_k = (y + k, y + k + 1), k = 0, …, n − 1, together with Λ, hold all changes, at
+  most one per member each.
+- So, with h_k the number of members having no change in S_k,
+
+      Σ_k h_k = Σ_f (n − (n − 1 − [f changes in Λ])) = N + c(y) ≤ 3n − 1.
+
+- Hence some h_k ≤ 2, and S_k has ≥ 2n − 1 changers, which contradicts (U). ∎
+
+The same computation for any class c needs (U_c): at most 2C(n − 1, c − 1) changers per window. It gives
+c(y) ≥ c for all y, which is a contradiction only for ε < n/(2C(n, c)). That is ½ for c = 1 and c = n − 1,
+and 1/(n − 1) for c = n − 2.
+
+**Evidence for (U).** CP-SAT, OPTIMAL in every case. The table gives the largest compatible family all of
+whose members change inside one open window of length λ:
+
+| grid | n | largest | 2n − 2 |
+|---|---|---|---|
+| (13,3) | 4 | 6 | 6 |
+| (22,5) | 4 | 6 | 6 |
+| (31,7) | 4 | 6 | 6 |
+| (19,3) | 6 | 10 | 10 |
+| (9,2), band edge | 4 | **8** | 6 |
+| (13,2), band edge | 6 | **15** | 10 |
+
+Further data:
+- On random maximal families at (13,3), (22,5) and (31,7), every window misses at least two members of any
+  8-member family.
+- Some pair of adjacent windows has exactly two misses each.
+
+### 5.4 Why (U) resists the same arguments
+
+- **A one-sided version is false.** It is not true that at most n − 1 members change *upward* in U. For n = 4
+  at P = 4.4 (grid (88, 20), U = cells 1–19), the 3-change functions with changes at
+  {1,22,42}, {10,42,62}, {19,62,82}, {1,22,62}, {19,42,82} are valid and pairwise compatible, and all change
+  upward in U (checked with `relaxation.compatible` and `runs_ok`). So (U) must use both directions
+  together.
+  - In the n = 4 model, an up-changer is a point (a, b) with b − a ∈ [1, 2 + ε].
+  - Two up-changers are compatible iff their L∞ distance is ≥ 1.
+  - Up to 5 such points fit; the up/down cross constraints must cut the total to 6.
+- **Rotating slots around U breaks injectivity.** Fix S_0 = U and rotate n − 1 unit slots and an ε-gap
+  around the rest of T. Then:
+  - each point lies in the gap with probability ε/(n − 1 + ε);
+  - the expected number of gap hits is < n − 2 exactly when ε < ½, which is what (U) would need;
+  - the slot that wraps across U still holds at most one change per member.
+
+  But two members with the same word can be compatible: one changes just before U and the other just after
+  it, with an opposite arc of length ≥ 1 between f's two changes. Recording the side doubles the words.
+  The non-wrapping placements form only n discrete gap positions, and averaging over n positions is too weak.
+- **Recursing (U) on itself with Lemma D needs ≤ 2 non-survivors among the changers.** Averaging fails here
+  too.
+
+### 5.5 c = n − 2 (n odd)
+
+- Lemma D gives M(n, n − 2) ≤ M(n − 2, n − 4) + #non-survivors, with cap difference 4n − 6.
+- Uniform averaging fails already at ε = 0. Words with adjacent agreements have |BC| = 3, so the bound
+  |BC| ≤ 4 + 2ε is lossy.
+- Theorem E's reduction covers only ε < 1/(n − 1), conditional on (U_{n−2}): at most (n − 1)(n − 2)
+  changers per window.
+- Lemma I caps the members deep at a point by M(n + 1, n), the top class of the even band n + 1. For n = 5
+  that is (R_5) at n = 6. Doubly deep points (two inserted windows) give ≤ 2 by Theorem B.
+- No proof, and no new n = 5 computation.
+
+### 5.6 Other routes, all negative (n = 4 unless noted)
+
+- **Species split by a gap ≥ 2λ.** Species 2 alone is already non-LP (see §5.2). Species 1 alone reaches 4
+  at (13,3) and 5 at (22,5).
+- **Fixed sign at one cell.** The class maximum is 2n − 1, not n: 7 at (13,3), (17,4), (22,5); 11 at (19,3)
+  for n = 6.
+- **One up-change per member as a representative, pairwise ≥ λ apart on S¹.** Fails for 18 of 91
+  8-member families at (13,3).
+- **LP restricted to the neighbourhood of one or two members.** Up to 8.17 for one member and 7.17 for two
+  at (13,3). Still fractional.
+- **Critical cycles.** For non-inflatable 8-families at (13,3) the cycle is the rotation orbit
+  0, 3, 6, …, 10 (k = 13, w = 3). At the edge, 9-families have 9 unit arcs in two turns. No rule found.
+- **Band-edge class maxima.** 12 at (9,2), 19 at (13,2) (n = 6), 26 at (17,2) (n = 8), i.e. (7n − 4)/2.
+- **n = 6.** (25,4): class maximum 12 = cap (OPTIMAL). (32,5): ≥ 12, bound 15 after 58 min, not closed.
 
 ## What would settle the problem
 
