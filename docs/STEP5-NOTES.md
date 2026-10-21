@@ -473,6 +473,31 @@ All without `sorry`, axioms only `propext`, `Classical.choice`, `Quot.sound` (`A
   `capacityBound_firstBand_of_statementR` (any n ≥ 2, assuming `StatementR n`).
 - Consequences: `CapacityBound` on [2,3), [4,5), [6,7); `alpha_five` (3π/5), `alpha_nine`, `alpha_ten` (5π/7).
 - Not formalized: n = 4 (Theorem C: the (22, 5) SAT certificate and the grid reduction of §4.3).
+### 4.8 n = 5 by a sharpened grid reduction (attempted, not closed)
+
+**Lemma (tight-cycle cover).** If the type of a family has critical length P* = k/w in lowest terms, the
+type is realisable on the grid (k, w) with a sign change at every one of the k boundaries. Moreover every
+boundary p starts an arc [p, p + w] that is either a run of one member or a whole run of fg = −1 for a
+pair.
+
+*Proof.* At P = P* the critical simple cycle is tight in every realisation, so each λ-edge advances
+exactly w cells and each 0-edge advances 0. Since gcd(k, w) = 1, the cycle meets all k residues mod k. ∎
+
+So (R_c) follows from a grid where the class maximum is below K, together with a covered search on each
+(k, w) with k ≤ J above that grid's ratio (`tight_cover.py plan` / `run`, with `--arcs` adding the arc
+condition).
+- **Check:** this reproves n = 4 in 7 s on (22, 5). With the arc condition it still finds the genuine
+  P* = 13/3 families on (13, 3).
+- **n = 5, c = 3, K = 21, base (16, 3):** six grids remain, (59,11), (43,8), (27,5), (38,7), (49,9) and
+  (60,11).
+- **Without the arc condition:** (27,5), (38,7), (43,8) and (49,9) each ended UNKNOWN after 6 h of CP-SAT.
+- **With it:** (27,5) has 451 404 pair variables and ended UNKNOWN after 20 min. A 6 h run was stopped
+  when the work was wrapped up.
+- **Not closed. (R) for n = 5 remains open.**
+
+A further dead route from Attempt 5: no rank-8 bound over F₂ (Haemers) exists for the top class at
+(13, 3), as the SAT check returned UNSAT.
+
 ## Attempt 5: the top class for even n (c = n − 1) (2026-10-20)
 
 **Results.**
