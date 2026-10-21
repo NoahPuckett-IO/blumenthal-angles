@@ -183,7 +183,8 @@ Attempt 4.3 makes this precise: one grid decides it.
 - (R) holds for **n = 4** for every λ ∈ (2π/9, π/4] (§4.4). This is computer-assisted: one exact
   computation on the grid (22, 5), done by two independent solvers.
 - So the first band of (L) holds for n ≤ 4, and α_N = 7π/9 for 17 ≤ N ≤ 20. The upper bound is
-  `alpha_lower_band_le`. **This is not formalized in Lean.**
+  `alpha_lower_band_le`. **Lean status (2026-10-20):** (R) for n ≤ 3 and the reduction of Attempt 3 are
+  formalized (see §4.7); n = 4 (the (22, 5) computation and the grid reduction) is not.
 - (R) for general n is **not proved**. n = 5 is reduced to a single finite computation (§4.6) that was
   not carried out.
 - The three suggested routes each fail at a specific, numerically checked point (§4.5).
@@ -455,6 +456,22 @@ vanish.
   - Just above the edge they must trade off down to 8. No argument found.
 - **All n.** The grid of Corollary 1 grows like J ~ n·2^n. So the reduction settles each n in principle
   but is not a route to every n.
+
+### 4.7 What is formalized in Lean
+
+All without `sorry`, axioms only `propext`, `Classical.choice`, `Quot.sound` (`Audit.lean`).
+- `StatementR n` (`Blumenthal/SignSeq.lean`): (R) for families of `f : ℝ → Bool` with `f (x + π) = ¬f x`,
+  runs ≥ ℓ (no two switches inside an open window of length ℓ), pairwise opposite on an open arc of
+  length ℓ.
+- Sign sequences `SignSeq ℓ`: changes `y : ℤ → ℝ`, `y (k + c) = y k + π`, `c` odd, gaps ≥ ℓ.
+  `exists_signSeq` (`SignBridge.lean`) shows every function in (R) is one, off its change points.
+- Lemma 0 `exists_witness`, Theorem A `card_le_of_c_eq_one` (≤ 2n), Theorem B `card_le_two_of_c_eq`
+  (≤ 2 for c = n, any odd n), and `statementR_of_le_three`.
+- Attempt 3's reduction (`FirstBand.lean`), with σ_p(x) = label of the last point of W(p) at or before
+  x + ℓ/2 instead of the Voronoi function (same three properties): `card_le_of_statementR`,
+  `capacityBound_firstBand_of_statementR` (any n ≥ 2, assuming `StatementR n`).
+- Consequences: `CapacityBound` on [2,3), [4,5), [6,7); `alpha_five` (3π/5), `alpha_nine`, `alpha_ten` (5π/7).
+- Not formalized: n = 4 (Theorem C: the (22, 5) SAT certificate and the grid reduction of §4.3).
 
 ## What would settle the problem
 

@@ -19,3 +19,16 @@ import Blumenthal
 #print axioms Blumenthal.alpha_three
 #print axioms Blumenthal.alpha_lower_band_le
 #print axioms Blumenthal.sendovUpper
+#print axioms Blumenthal.SignSeq.exists_witness
+#print axioms Blumenthal.SignSeq.card_le_of_c_eq_one
+#print axioms Blumenthal.SignSeq.card_le_two_of_c_eq
+#print axioms Blumenthal.SignBridge.exists_signSeq
+#print axioms Blumenthal.statementR_of_le_three
+#print axioms Blumenthal.card_le_of_statementR
+#print axioms Blumenthal.capacityBound_firstBand_of_statementR
+#print axioms Blumenthal.capacityBound_two_three
+#print axioms Blumenthal.capacityBound_four_five
+#print axioms Blumenthal.capacityBound_six_seven
+#print axioms Blumenthal.alpha_five
+#print axioms Blumenthal.alpha_nine
+#print axioms Blumenthal.alpha_ten
